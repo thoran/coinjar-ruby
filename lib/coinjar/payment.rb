@@ -7,9 +7,9 @@ module CoinJar
       :payee,
       :payee_name,
       :related_transaction_uuid,
-      :status
+      :status,
       :updated_at,
-      :uuid,
+      :uuid
 
     def initialize(args)
       reset(args)

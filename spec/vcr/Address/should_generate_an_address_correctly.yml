@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/bitcoin_addresses.json
+    uri: https://secure.sandbox.coinjar.io/api/v1/bitcoin_addresses.json
     body:
       encoding: UTF-8
       string: label=Test label

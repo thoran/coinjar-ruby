@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/transactions.json?limit=100&offset=0
+    uri: https://secure.sandbox.coinjar.io/api/v1/transactions.json?limit=100&offset=0
     body:
       encoding: US-ASCII
       string: ''

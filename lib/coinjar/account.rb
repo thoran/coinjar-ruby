@@ -18,6 +18,8 @@ module CoinJar
       :unconfirmed_balance,
       :uuid,
 
+    def initialize; end
+
     def fetch
       response = CoinJar.client.get('account')
       self.reset(response[:user])

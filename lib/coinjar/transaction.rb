@@ -73,8 +73,8 @@ module CoinJar
       :created_at,
       :status,
       :related_payment_uuid,
-      :updated_at
-      :uuid,
+      :updated_at,
+      :uuid
 
     def initialize(args)
       reset(args)

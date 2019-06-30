@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Transaction', :vcr, class: CoinJar::Transaction do
-
   it 'should return an array of transaction object for the current user' do
     transactions = CoinJar::Transaction.list
     expect(transactions.first).to be_an_instance_of(CoinJar::Transaction)

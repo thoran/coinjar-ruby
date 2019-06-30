@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/payments.json
+    uri: https://secure.sandbox.coinjar.io/api/v1/payments.json
     body:
       encoding: US-ASCII
       string: payment[amount]=1.25&payment[payee]=n1Pc4SRA4xmG1k3SejrmTAX3NynALcT6sq

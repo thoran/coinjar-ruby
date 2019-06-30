@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/fair_rate/AUD.json
+    uri: https://secure.sandbox.coinjar.io/api/v1/fair_rate/AUD.json
     body:
       encoding: US-ASCII
       string: ''

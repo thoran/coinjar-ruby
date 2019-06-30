@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/payments.json
+    uri: https://secure.sandbox.coinjar.io/api/v1/payments.json
     body:
       encoding: US-ASCII
       string: payment[amount]=1.5&payment[payee]=n1Pc4SRA4xmG1k3SejrmTAX3NynALcT6sq
@@ -63,7 +63,7 @@ http_interactions:
   recorded_at: Sat, 05 Apr 2014 06:00:55 GMT
 - request:
     method: post
-    uri: https://pJ451Sk8tXz9LdUbGg1sobLUZuVzuJwdyr4sD3owFW4WYHxo:@secure.sandbox.coinjar.io/api/v1/payments/03a14b58-ab0a-4c3f-9987-46d009cfaa8a/confirm.json
+    uri: https://secure.sandbox.coinjar.io/api/v1/payments/03a14b58-ab0a-4c3f-9987-46d009cfaa8a/confirm.json
     body:
       encoding: UTF-8
       string: ''

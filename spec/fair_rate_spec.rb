@@ -6,4 +6,5 @@ describe 'FairRate', :vcr, class: CoinJar::FairRate do
     fairrate = CoinJar::FairRate.new('AUD')
     expect(fairrate).to respond_to(:bid, :ask, :spot)
   end
+
 end
