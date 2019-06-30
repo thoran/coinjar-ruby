@@ -1,6 +1,6 @@
 module CoinJar
   module Configuration
-    VALID_CONFIG_KEYS     = [:api_key, :endpoint, :format]
+    VALID_CONFIG_KEYS = [:api_key, :endpoint, :format]
 
     DEFAULT_ENDPOINT = 'https://api.coinjar.io/v1'
     DEFAULT_API_KEY = nil
@@ -20,7 +20,7 @@ module CoinJar
     end
 
     def config_options
-      Hash[ * VALID_CONFIG_KEYS.map { |key| [key, send(key)] }.flatten ]
+      Hash[*VALID_CONFIG_KEYS.map{|key| [key, send(key)]}.flatten]
     end
 
   end

@@ -1,21 +1,27 @@
 module CoinJar
   class Account
 
-    attr_accessor :unconfirmed_balance, :uuid, :email, :full_name, :available_balance
+    class << self
 
-    def initialize
-    end
+      def find
+        user = self.new
+        user.fetch
+        user
+      end
+
+    end # class << self
+
+    attr_accessor\
+      :available_balance,
+      :email,
+      :full_name,
+      :unconfirmed_balance,
+      :uuid,
 
     def fetch
-      response = CoinJar.client.get("account")
+      response = CoinJar.client.get('account')
       self.reset(response[:user])
       self
-    end
-
-    def self.find
-      user = self.new
-      user.fetch
-      user
     end
 
     def reset(args)

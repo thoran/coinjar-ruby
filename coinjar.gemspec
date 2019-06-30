@@ -5,6 +5,7 @@ require 'coinjar/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'coinjar'
+
   spec.version       = CoinJar::VERSION
   spec.authors       = ["CoinJar Pty Ltd", "Ryan Zhou", "Jerrold Poh", 'chrisberkhout', 'dNitza', 'thoran']
   spec.email         = ['code@thoran.com']
@@ -18,14 +19,15 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "shoulda"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "vcr"
-  spec.add_development_dependency "guard-rspec"
-  spec.add_runtime_dependency "rest-client"
-  spec.add_runtime_dependency "multi_json"
-  spec.add_runtime_dependency "activesupport"
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'shoulda'
+  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'guard-rspec'
+
+  spec.add_runtime_dependency 'rest-client'
+  spec.add_runtime_dependency 'multi_json'
+  spec.add_runtime_dependency 'activesupport'
 end

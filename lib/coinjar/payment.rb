@@ -1,14 +1,22 @@
 module CoinJar
   class Payment
 
-    attr_accessor :uuid, :payee, :payee_name, :amount, :status, :related_transaction_uuid, :created_at, :updated_at
+    attr_accessor\
+      :amount,
+      :created_at,
+      :payee,
+      :payee_name,
+      :related_transaction_uuid,
+      :status
+      :updated_at,
+      :uuid,
 
     def initialize(args)
       reset(args)
     end
 
     def create
-      response = CoinJar.client.post("payments", {:payment => self.instance_values})
+      response = CoinJar.client.post("payments", {payment: self.instance_values})
       self.reset(response[:payment])
       self
     end

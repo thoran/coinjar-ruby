@@ -1,14 +1,16 @@
 module CoinJar
   class Client
 
-    attr_accessor *Configuration::VALID_CONFIG_KEYS, :root_resource
+    attr_accessor\
+      *Configuration::VALID_CONFIG_KEYS,
+      :root_resource
 
-    def initialize(options={})
+    def initialize(options = {})
       merged_options = CoinJar.config_options.merge(options)
       Configuration::VALID_CONFIG_KEYS.each do |key|
         send("#{key}=", merged_options[key])
       end
-      @root_resource = RestClient::Resource.new(endpoint, :user => api_key)
+      @root_resource = RestClient::Resource.new(endpoint, user: api_key)
     end
 
     def post(path, payload)
@@ -16,7 +18,7 @@ module CoinJar
     end
 
     def get(path, params = nil)
-      parse url(path).get(:params => params)
+      parse url(path).get(params: params)
     end
 
     def put(path, payload)
@@ -32,7 +34,7 @@ module CoinJar
     end
 
     def parse(response)
-      MultiJson.load(response, :symbolize_keys => true)
+      MultiJson.load(response, symbolize_keys: true)
     end
 
     def url(path)

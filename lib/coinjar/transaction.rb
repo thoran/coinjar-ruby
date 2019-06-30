@@ -1,80 +1,95 @@
 module CoinJar
   class Transaction
 
-    attr_accessor :uuid, :counterparty_name, :counterparty_type, :amount, :status, :confirmations, :bitcoin_txid, :related_payment_uuid, :created_at, :updated_at
+    class << self
+
+      def all
+        offset = -100
+        all_transactions = []
+        query_results = [nil]
+        until query_results.empty?
+          query_results = self.list(offset += 100)
+          all_transactions += query_results
+        end
+        all_transactions
+      end
+
+      def bitcoin_transactions
+        all.select{|t| t.bitcoin_transaction?}
+      end
+
+      def exchange_transactions
+        all.select{|t| t.exchange_transaction?}
+      end
+
+      def bitcoin_deposits
+        all.select{|t| t.bitcoin_deposit?}
+      end
+      alias_method :btc_received, :bitcoin_deposits
+
+      def bitcoin_withdrawals
+        all.select{|t| t.bitcoin_withdrawal?}
+      end
+      alias_method :btc_sent, :bitcoin_withdrawals
+
+      def purchases
+        all.select{|t| t.purchase?}
+      end
+      alias_method :btc_bought, :purchases
+
+      def sales
+        all.select{|t| t.sale?}
+      end
+      alias_method :btc_sold, :sales
+
+      def find_by_bitcoin_txid(txid)
+        all.detect{|t| txid == t.bitcoin_txid}
+      end
+
+      def find_all_by_bitcoin_txid(*txids)
+        txids = txids.flatten
+        all.select{|t| txids.include?(t.bitcoin_txid)}
+      end
+
+      def find(uuid)
+        transaction = self.new(uuid: uuid)
+        transaction.fetch
+        transaction
+      end
+
+      def list(offset = 0, limit = 100)
+        response = CoinJar.client.get('transactions', {offset: offset, limit: limit})
+        response[:transactions].map{|transaction| self.new transaction}
+      end
+
+    end # class << self
+
+    attr_accessor\
+      :amount,
+      :bitcoin_txid,
+      :confirmations,
+      :counterparty_name,
+      :counterparty_type,
+      :created_at,
+      :status,
+      :related_payment_uuid,
+      :updated_at
+      :uuid,
 
     def initialize(args)
       reset(args)
     end
 
     def fetch
-      response = CoinJar.client.get("transactions/" + uuid)
+      response = CoinJar.client.get('transactions/' + uuid)
       self.reset(response[:transaction])
       self
-    end
-
-    def self.find(uuid)
-      transaction = self.new(uuid: uuid)
-      transaction.fetch
-      transaction
-    end
-
-    def self.list(offset = 0, limit = 100)
-      CoinJar.client.get("transactions", { offset: offset, limit: limit })[:transactions].map { |t| self.new t }
     end
 
     def reset(args)
       args.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end
-    end
-
-    def self.all
-      offset = -100
-      all_transactions = []
-      query_results = [nil]
-      until query_results.empty?
-        query_results = self.list(offset += 100)
-        all_transactions += query_results
-      end
-      all_transactions
-    end
-
-    def self.bitcoin_transactions
-      all.select{|t| t.bitcoin_transaction?}
-    end
-
-    def self.exchange_transactions
-      all.select{|t| t.exchange_transaction?}
-    end
-
-    def self.bitcoin_deposits
-      all.select{|t| t.bitcoin_deposit?}
-    end
-    class << self; alias_method :btc_received, :bitcoin_deposits; end
-
-    def self.bitcoin_withdrawals
-      all.select{|t| t.bitcoin_withdrawal?}
-    end
-    class << self; alias_method :btc_sent, :bitcoin_withdrawals; end
-
-    def self.purchases
-      all.select{|t| t.purchase?}
-    end
-    class << self; alias_method :btc_bought, :purchases; end
-
-    def self.sales
-      all.select{|t| t.sale?}
-    end
-    class << self; alias_method :btc_sold, :sales; end
-
-    def self.find_by_bitcoin_txid(txid)
-      all.detect{|t| txid == t.bitcoin_txid}
-    end
-
-    def self.find_all_by_bitcoin_txid(*txids)
-      txids = txids.flatten
-      all.select{|t| txids.include?(t.bitcoin_txid)}
     end
 
     # boolean methods
