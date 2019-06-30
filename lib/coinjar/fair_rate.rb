@@ -9,7 +9,7 @@ module CoinJar
 
     def initialize(currency = 'USD')
       @currency = currency
-      response = CoinJar.client.get('fair_rate/' + currency)
+      response = CoinJar.client.get("fair_rate/#{currency}")
       @bid = BigDecimal.new(response[:bid])
       @ask = BigDecimal.new(response[:ask])
       @spot = BigDecimal.new(response[:spot])

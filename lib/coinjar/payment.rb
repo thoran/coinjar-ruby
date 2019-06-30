@@ -1,6 +1,21 @@
 module CoinJar
   class Payment
 
+    class << self
+
+      def find(uuid)
+        payment = self.new(uuid: uuid)
+        payment.fetch
+        payment
+      end
+
+      def list(offset = 0, limit = 100)
+        response = CoinJar.client.get('payments', {offset: offset, limit: limit})
+        response[:payments].map{|payment| self.new(payment)}
+      end
+
+    end # class << self
+
     attr_accessor\
       :amount,
       :created_at,
@@ -11,12 +26,12 @@ module CoinJar
       :updated_at,
       :uuid
 
-    def initialize(args)
-      reset(args)
+    def initialize(**args)
+      reset(**args)
     end
 
     def create
-      response = CoinJar.client.post("payments", {payment: self.instance_values})
+      response = CoinJar.client.post('payments', {payment: self.instance_values})
       self.reset(response[:payment])
       self
     end
@@ -28,22 +43,12 @@ module CoinJar
     end
 
     def fetch
-      response = CoinJar.client.get("payments/" + uuid)
+      response = CoinJar.client.get("payments/#{uuid}")
       self.reset(response[:payment])
       self
     end
 
-    def self.find(uuid)
-      payment = self.new(uuid: uuid)
-      payment.fetch
-      payment
-    end
-
-    def self.list(offset = 0, limit = 100)
-      CoinJar.client.get("payments", { offset: offset, limit: limit })[:payments].map { |p| self.new p }
-    end
-
-    def reset(args)
+    def reset(**args)
       args.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end

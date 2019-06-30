@@ -76,17 +76,17 @@ module CoinJar
       :updated_at,
       :uuid
 
-    def initialize(args)
-      reset(args)
+    def initialize(**args)
+      reset(**args)
     end
 
     def fetch
-      response = CoinJar.client.get('transactions/' + uuid)
+      response = CoinJar.client.get("transactions/#{uuid}")
       self.reset(response[:transaction])
       self
     end
 
-    def reset(args)
+    def reset(**args)
       args.each do |k,v|
         instance_variable_set("@#{k}", v) unless v.nil?
       end
