@@ -4,7 +4,7 @@ module CoinJar
     class << self
 
       def generate(label = nil)
-        response = CoinJar.client.post("bitcoin_addresses", "label=#{label}")
+        response = CoinJar.client.post('bitcoin_addresses', "label=#{label}")
         self.new(response[:bitcoin_address])
       end
 

@@ -14,9 +14,9 @@ module CoinJar
     end
 
     def reset
-      self.endpoint = DEFAULT_ENDPOINT
-      self.api_key = DEFAULT_API_KEY
-      self.format = DEFAULT_FORMAT
+      @endpoint = DEFAULT_ENDPOINT
+      @api_key = DEFAULT_API_KEY
+      @format = DEFAULT_FORMAT
     end
 
     def config_options
