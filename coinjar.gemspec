@@ -4,21 +4,21 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'coinjar/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "coinjar"
+  spec.name          = 'coinjar'
   spec.version       = CoinJar::VERSION
-  spec.authors       = ["CoinJar Pty Ltd", "Ryan Zhou", "Jerrold Poh"]
-  spec.email         = ["info@coinjar.io"]
-  spec.description   = ["Official Ruby gem for CoinJar."]
+  spec.authors       = ["CoinJar Pty Ltd", "Ryan Zhou", "Jerrold Poh", 'chrisberkhout', 'dNitza', 'thoran']
+  spec.email         = ['code@thoran.com']
+  spec.description   = ["Unofficial Ruby gem for CoinJar's API."]
   spec.summary       = ["CoinJar is an easy-to-use Bitcoin payment platform."]
-  spec.homepage      = "https://coinjar.io"
-  spec.license       = "MIT"
+  spec.homepage      = 'https://github.com/thoran/coinjar-ruby'
+  spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
-  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "shoulda"
